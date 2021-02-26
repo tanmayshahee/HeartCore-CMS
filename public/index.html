@@ -1,32 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta name="description" content="" />
+    <!-- Twitter meta-->
+    <meta property="twitter:card" content=" " />
+    <meta property="twitter:site" content=" " />
+    <meta property="twitter:creator" content="" />
+    <!-- Oeye Graph Meta-->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content=" " />
+    <meta property="og:title" content="" />
+    <meta property="og:url" content=" " />
+    <meta property="og:image" content="" />
+    <meta property="og:description" content="" />
+    <title>HeartCore</title>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
+    <!-- Main CSS-->
+    <link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/sass/main.css" />
+    <!-- Font-icon css-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
   </head>
-  <body>
+  <body class="app">
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <!--
@@ -39,5 +39,35 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+
+    <!-- Essential javascripts for application to work-->
+    <script src="%PUBLIC_URL%/js/jquery-3.3.1.min.js"></script>
+    <script src="%PUBLIC_URL%/js/popper.min.js"></script>
+    <script src="%PUBLIC_URL%/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
+    <script src="%PUBLIC_URL%/js/main.js"></script>
+    <!-- The javascript plugin to display page loading on top-->
+    <script src="%PUBLIC_URL%/js/plugins/pace.min.js"></script>
+    <!-- Data table plugin-->
+    <script
+      type="text/javascript"
+      src="%PUBLIC_URL%/js/plugins/sweetalert.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="%PUBLIC_URL%/js/plugins/jquery.dataTables.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="%PUBLIC_URL%/js/plugins/dataTables.bootstrap4.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="%PUBLIC_URL%/js/plugins/dataTables.responsive.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="%PUBLIC_URL%/js/plugins/responsive.bootstrap4.min.js"
+    ></script>
   </body>
 </html>

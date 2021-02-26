@@ -1,0 +1,153 @@
+// Componant: Material Loader
+
+.m-loader {
+	position: relative;
+	width: 40px;
+	&:before {
+		content: '';
+		display: block;
+		padding-top: 100%;
+	}
+}
+
+.m-circular {
+	animation: rotate 1.5s linear infinite;
+	height: 100%;
+	transform-origin: center center;
+	width: 100%;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+}
+.path {
+	stroke-dasharray: 1,200;
+	stroke-dashoffset: 0;
+	stroke: $primary-color;
+	animation: dash 1.5s ease-in-out infinite;
+	stroke-linecap: round;
+}
+@keyframes rotate {
+	100% { transform: rotate(360deg); }
+}
+@keyframes dash {
+	0% {
+		stroke-dasharray: 1,200;
+		stroke-dashoffset: 0;
+	}
+	50% {
+		stroke-dasharray: 89,200;
+		stroke-dashoffset: -35px;
+	}
+	100% {
+		stroke-dasharray: 89,200;
+		stroke-dashoffset: -124px;
+	}
+}
+
+.lds-wrapper {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 99999;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(255, 255, 255, 0.8)
+}
+
+@keyframes lds-dual-ring {
+	0% {
+		-webkit-transform: rotate(0);
+		transform: rotate(0);
+	}
+
+	100% {
+		-webkit-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
+}
+
+@-webkit-keyframes lds-dual-ring {
+	0% {
+		-webkit-transform: rotate(0);
+		transform: rotate(0);
+	}
+
+	100% {
+		-webkit-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes lds-dual-ring_reverse {
+	0% {
+		-webkit-transform: rotate(0);
+		transform: rotate(0);
+	}
+
+	100% {
+		-webkit-transform: rotate(-360deg);
+		transform: rotate(-360deg);
+	}
+}
+
+@-webkit-keyframes lds-dual-ring_reverse {
+	0% {
+		-webkit-transform: rotate(0);
+		transform: rotate(0);
+	}
+
+	100% {
+		-webkit-transform: rotate(-360deg);
+		transform: rotate(-360deg);
+	}
+}
+
+.lds-dual-ring {
+	position: relative;
+}
+
+.lds-dual-ring div {
+	position: fixed;
+	width: 80px;
+	height: 80px;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	margin: auto;
+	border-radius: 50%;
+	border: 6px solid #000;
+	border-color: #1ABB95 transparent #1ABB95 transparent;
+	-webkit-animation: lds-dual-ring 2.2s linear infinite;
+	animation: lds-dual-ring 2.2s linear infinite;
+}
+
+.lds-dual-ring div:nth-child(2) {
+	width: 64px;
+	height: 64px;
+	top: 0px;
+	left: 0px;
+	border-color: transparent #294A6E transparent #294A6E ;
+	-webkit-animation: lds-dual-ring_reverse 2.2s linear infinite;
+	animation: lds-dual-ring_reverse 2.2s linear infinite;
+}
+
+.lds-double-ring {
+	width: 200px !important;
+	height: 200px !important;
+	-webkit-transform: translate(-100px, -100px) scale(1) translate(100px, 100px);
+	transform: translate(-100px, -100px) scale(1) translate(100px, 100px);
+}
+
+
+// Usage Example
+// <div class="m-loader mr-20">
+// 	<svg class="m-circular" viewBox="25 25 50 50">
+// 		<circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="4" stroke-miterlimit="10"></circle>
+// 	</svg>
+// </div>

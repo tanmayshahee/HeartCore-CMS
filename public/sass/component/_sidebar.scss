@@ -1,0 +1,212 @@
+// Componant: Sidebar 
+
+.app-sidebar {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	padding-top: 70px;
+	width: $sidebar-width;
+	overflow: auto;
+	z-index: 10;
+	background-color: $sidebar-color;
+	box-shadow: 0px 0px 16px rgba(197, 197, 197, 0.34);
+	transition: left 0.3s ease,
+				width 0.3s ease;
+	&::-webkit-scrollbar { width: 6px; }
+	&::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.2); }
+	@media print { display: none; }
+}
+
+.app-sidebar__overlay {
+	@media(max-width: 767px) {
+		position: fixed;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		z-index: 9;
+	}
+}
+
+.app-sidebar__user {
+	display: flex;
+	align-items: center;
+	padding: 10px;
+	margin-bottom: 20px;
+	@if $sidebar-accent == dark {
+		color: #fff;
+	}
+}
+
+.app-sidebar__user-avatar {
+	@extend .rounded-circle;
+	flex: 0 0 auto;
+	margin-right: 15px;
+}
+
+.app-sidebar__user-name {
+	font-size: 17px;
+	line-height: 1.3;
+}
+
+.app-sidebar__user-name,
+.app-sidebar__user-designation {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	margin-bottom: 0;
+}
+
+.app-menu {
+	@extend .list-unstyled;
+	margin-bottom: 0;
+	padding-bottom: 40px;
+	// padding-top: 20px;
+}
+
+.app-menu__item {
+	position: relative;
+	display: flex;
+	align-items: center;
+	padding: 13px 15px 13px 35px;
+	font-size: 0.875rem;
+	font-weight: 500;
+	// border-left: 3px solid transparent;
+	color: #8E8E8E;
+	transition: border-left-color 0.3s ease,
+				background-color 0.3s ease;
+	//@if $sidebar-accent == dark { color: $sidebar-dark-link-color }
+	//@if $sidebar-accent == light { color: $sidebar-light-link-color }
+	&.active,
+	&:hover,
+	&:focus {
+		//background: darken($sidebar-color, 10);
+		background: #F8F3EE;
+		//border-left-color: $primary-color;
+		text-decoration: none;
+		color: $font-color-brown;
+		//@if $sidebar-accent == dark { color: $sidebar-dark-link-color }
+		//@if $sidebar-accent == light { color: $primary-color }
+	}
+}
+
+.app-menu__icon {
+	flex: 0 0 auto;
+	width: 20px;
+	font-size: 1rem;	
+	&.wardrobe-dot {
+		font-size: 0.625rem;
+		 
+	}
+}
+
+.app-menu__item { 
+	&.active,
+	&:hover,
+	&:focus {
+		.wardrobe-dot {
+			color: $secondary-color;
+		}
+	}
+}
+
+.app-menu__item {
+	&.app-menu__caption {
+		color: $white;
+		// cursor: default;
+		font-size: 15px;
+		font-weight: 500;
+		text-transform: capitalize;
+		padding: 13px 15px 13px 25px;
+
+		.app-menu__icon {
+			font-size: 1.5rem;
+			color: #000000;
+			margin-right: 15px;
+		}
+
+		&.active,
+		&:hover,
+		&:focus{
+			background-color: $primary-color;
+			color: #ffffff;
+
+			.app-menu__icon {
+				color: #ffffff;
+				font-weight: normal;
+			}
+		}
+	}
+}
+.app-menu__label {
+	white-space: nowrap;
+	flex: 1 1 auto;
+}
+
+.treeview {
+	&.is-expanded {
+		[data-toggle='treeview'] {
+			border-left-color: $primary-color;
+			background-color: $primary-color;
+			color: #ffffff;
+			
+			i {
+				color: #ffffff;
+			}
+		}
+		.treeview-menu { max-height: 100vh; }
+		.treeview-indicator { transform: rotate(90deg); }
+	}
+}
+
+.treeview-menu {
+	@extend .list-unstyled;
+	max-height: 0;
+	overflow: hidden;
+	transition: max-height 0.3s ease;
+	@if $sidebar-accent == dark {
+		background: lighten($sidebar-color, 4)
+	}
+	@if $sidebar-accent == light {
+		background: darken($sidebar-color, 4)
+	}
+}
+
+.treeview-item {
+	display: flex;
+	align-items: center;
+	padding: 13px 15px 13px 40px;
+	font-size: 1em;
+	font-weight: 500;
+	color: $secondary-color;
+	// @if $sidebar-accent == dark { color: $sidebar-dark-link-color }
+	// @if $sidebar-accent == light { color: $sidebar-light-link-color }
+
+	.app-menu__icon-small {
+		font-size: 0.6rem;
+		color: $secondary-color;
+		margin-right: 15px;		
+	}
+
+	&.active,
+	&:hover,
+	&:focus {
+		background: #C5EEE4;
+		text-decoration: none;
+		// color: #ffffff;
+		// @if $sidebar-accent == dark { color: $sidebar-dark-link-color }
+		// @if $sidebar-accent == light { color: $primary-color }
+
+		// .app-menu__icon-small {
+		// 	color: #ffffff;
+		// }
+	}
+	.icon { margin-right: 5px; }
+	
+}
+
+.treeview-indicator {
+	transform-origin: center;
+	transition: transform 0.3s ease;
+}

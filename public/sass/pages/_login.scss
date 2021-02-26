@@ -1,0 +1,258 @@
+.app-bg {
+	background: url(../images/body-bg.png) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.login-content, .signup-content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+
+	&:before {
+		content: '';
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		background-color: rgba(0,0,0,0.55);
+	}
+
+	.login-page-text {
+		z-index: 1;
+		margin-top: 80px;
+		margin-left: -25%;
+
+		h2 {
+			font-size: 84px;
+			color: #ffffff;
+			font-weight: 200;
+
+			span {
+				background-color: $primary-color;
+				padding: 3px;
+			}
+		}
+		h4 {
+			font-size: 54px;
+			color: #ffffff;
+			font-weight: bold;
+		}
+	}
+
+	.logo {
+		margin-bottom: 40px;
+		color: #fff;
+		display:flex;
+		justify-content: center;
+		align-items: center;
+		h1 {
+			font-size: 52px;
+			font-weight: 400;
+		}
+	}
+
+	.login-box {
+		position: absolute;
+		right: 15%;
+		// top: 0;
+		// bottom: 0;
+		margin: auto;
+		min-width: 440px;
+		// min-height: 540px;
+		max-width: 440px;
+		// max-height: 730px;
+		background-color: #fff;
+		//box-shadow: 0px 29px 147.5px 102.5px rgba(0, 0, 0, 0.05), 0px 29px 95px 0px rgba(0, 0, 0, 0.16);
+		perspective: 800px;
+		transition: all 0.5s ease-in-out;
+		-webkit-transition: all 0.5s ease-in-out;
+		-moz-transition: all 0.5s ease-in-out;
+		-ms-transition: all 0.5s ease-in-out;
+		-o-transition: all 0.5s ease-in-out;
+		border-radius:12px;
+		-webkit-border-radius:12px;
+		-moz-border-radius:12px;
+		-ms-border-radius:12px;
+		-o-border-radius:12px;
+		padding: 30px 50px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		.login-box-inner {
+			min-width: 400px;
+		}
+
+		.login-head{
+			margin-top: 0;
+			margin-bottom: 20px;
+			padding-bottom: 20px;
+			color: #0E2845;
+			text-align: center;
+			font-size: 32px;
+			font-weight: normal;
+		}
+
+		label {
+			color: $font-color-brown;
+			font-weight: 400;
+			.extric {
+				color: $primary-color;
+			}
+		}
+
+		.utility {
+			display: flex;
+			padding: 1px;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+		}
+
+		.btn-container {
+			margin-top: 40px;
+			margin-bottom: 0;
+			.btn {
+				font-size: 1.0625rem;
+				padding: 0.875rem 1rem;
+			}
+		}
+
+		.login-form, .forget-form {
+			// position: absolute;
+			// top: 0;
+			// bottom: 0;
+			// left: 0;
+			// right: 0;
+			// padding: 40px;
+			position: relative;
+			backface-visibility: hidden;
+			-webkit-backface-visibility: hidden;
+			transition: all 0.5s ease-in-out;
+		}
+
+		.forget-form {
+			opacity: 0;
+			transform: rotateY(180deg);
+		}
+
+		&.flipped {
+			min-height: 300px;
+
+			.login-form {
+				opacity: 0;
+				transform: rotateY(-180deg);
+			}
+
+			.forget-form {
+				opacity: 1;
+				transform: rotateY(0deg);
+			}
+		}
+	}
+
+
+}
+
+.signup-content {
+	.login-box {
+		position: absolute;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		min-width: 680px;
+		.btn-container {
+			margin-top: 20px;
+			margin-bottom: 0;
+		}
+		 
+	}
+	
+}
+
+@media (max-width: 1499.98px) {
+	.login-content,.signup-content {
+		.login-page-text {
+			margin-left: -45%;
+		}
+	}
+}
+@media (max-width: 1199.98px) {
+	.login-content,.signup-content {
+		.login-page-text {
+			margin-left: -60%;
+
+			h2 {
+				font-size: 50px;
+			}
+			h4 {
+				font-size: 34px;
+			}
+		}
+	}
+}
+
+@media (max-width: 991.98px) {
+	.login-content {
+		padding: 40px 25px;
+
+		.login-page-text {
+			margin-left: 0;
+		}
+
+		.login-box {
+			position: relative;
+			right: auto;
+			top: auto;
+			padding: 30px 25px;
+			max-width: 100%;
+			min-width: 100%;
+
+			.login-box-inner {
+				min-width: 100%;
+
+				.logo {
+					img {
+						max-width: 100%;
+					}
+				}
+			}
+
+			.login-form, .forget-form {
+				width: 100%;
+			}
+		}
+	}
+	.signup-content {
+		padding: 40px 25px;
+		.login-box {
+			position: relative;
+			right: auto;
+			top: auto;
+			padding: 30px 25px;
+			max-width: 100%;
+			min-width: 100%;
+		}
+		.login-form, .forget-form {
+			width: 100%;
+		}
+	}
+}
+@media (max-width: 575.98px) {
+	.login-content,.signup-content {
+		.login-page-text {
+			h2 {
+				font-size: 40px;
+			}
+			h4 {
+				font-size: 24px;
+			}
+		}
+	}
+}

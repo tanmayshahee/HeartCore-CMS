@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_391" data-name="Rectangle 391" width="32" height="32" transform="translate(-0.333 -0.333)" fill="#294a6e" stroke="#707070" stroke-width="1"/>
+    </clipPath>
+  </defs>
+  <g id="Group_3048" data-name="Group 3048" transform="translate(-3 -97)">
+    <g id="RTS" transform="translate(3.333 97.333)" clip-path="url(#clip-path)">
+      <g id="RTS-Pckage" transform="translate(0.052 -0.348)">
+        <path id="Path_2727" data-name="Path 2727" d="M62.57,38.257l-4.928-7.391a.822.822,0,0,0-.683-.365H37.249a.822.822,0,0,0-.683.365l-4.928,7.391a.826.826,0,0,0-.138.456v23a.821.821,0,0,0,.821.821H61.887a.821.821,0,0,0,.821-.821v-23A.826.826,0,0,0,62.57,38.257Zm-6.05-6.114,3.832,5.749H51.124l-.638-5.749Zm-11.145,0h3.458l.638,5.749H44.736Zm-.735,7.391h4.928v4.928H44.64Zm-6.952-7.391h6.035l-.638,5.749H33.856ZM61.066,60.887H33.143V39.534H43V46.1h8.213v-6.57h9.855ZM36.428,52.674h13.14V51.032H36.428Zm0,4.106H44.64V55.138H36.428Z" transform="translate(-31.5 -30.5)" fill="#294a6e"/>
+      </g>
+    </g>
+  </g>
+</svg>
