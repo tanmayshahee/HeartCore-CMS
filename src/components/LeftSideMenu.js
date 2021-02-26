@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const LeftSideMenu = () => {
+  const [selectedMenuItem, setSelectedMenuItem] = useState('');
+  const onMenuItemClick = (menuItem) => {
+    setSelectedMenuItem(menuItem);
+  };
   return (
     <>
       <div className='app-sidebar__overlay' data-toggle='sidebar'></div>
@@ -28,8 +32,12 @@ const LeftSideMenu = () => {
             </a>
           </li>
           <li>
-            <Link to='/content'>
-              <div className='app-menu__item app-menu__caption'>
+            <Link to='/content' onClick={() => onMenuItemClick('content')}>
+              <div
+                className={`app-menu__item app-menu__caption ${
+                  selectedMenuItem === 'content' ? 'active' : ''
+                }`}
+              >
                 <img
                   src='images/blog.svg'
                   className='app-menu__icon log-i log-icon-dashboard'

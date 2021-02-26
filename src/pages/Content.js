@@ -1,12 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { getFilteredData } from '../services/contentApi';
 
 const Content = () => {
   const { items } = useSelector((state) => state.content);
+
+  useEffect(() => {
+    getContentData();
+  }, []);
+
+  const getContentData = async () => {
+    //Api call to fetch Data;
+  };
   const renderListItems = () => {
     return items.map((item) => {
       return (
-        <tr>
+        <tr key={item.id}>
           <td>
             <div className='animated-checkbox'>
               <label className='m-0'>
@@ -23,14 +32,14 @@ const Content = () => {
           <td>
             <span className='status status-published'>{item.status}</span>
             {item.dateTime}
-            {item.isHomepage && (
+            {item.isHomePage && (
               <span className='status status-homepage'>
                 <i className='fa fa-home' aria-hidden='true'></i>
                 Homepage
               </span>
             )}
           </td>
-          <td>
+          <td className='preview-btn-container'>
             <a href='/#' className='btn btn-outline-primary btn-sm'>
               Preview
             </a>
@@ -44,6 +53,23 @@ const Content = () => {
         </tr>
       );
     });
+  };
+
+  const onGroupChange = async (e) => {
+    console.log(e.target.selectedIndex);
+    //getFilteredData();
+  };
+  const onTypeChange = async (e) => {
+    console.log(e.target.selectedIndex);
+    //getFilteredData();
+  };
+  const onVersionChange = async (e) => {
+    console.log(e.target.selectedIndex);
+    //getFilteredData();
+  };
+  const onStatusChange = async (e) => {
+    console.log(e.target.selectedIndex);
+    //getFilteredData();
   };
   return (
     <main className='app-content'>
@@ -113,7 +139,10 @@ const Content = () => {
                     <div className='col-lg-3'>
                       <div className='form-group'>
                         <label className='mb-1'>Group</label>
-                        <select className='form-control'>
+                        <select
+                          className='form-control'
+                          onChange={onGroupChange}
+                        >
                           <option>All</option>
                           <option>1</option>
                           <option>2</option>
@@ -124,7 +153,10 @@ const Content = () => {
                     <div className='col-lg-3'>
                       <div className='form-group'>
                         <label className='mb-1'>Type</label>
-                        <select className='form-control'>
+                        <select
+                          className='form-control'
+                          onChange={onTypeChange}
+                        >
                           <option>All</option>
                           <option>1</option>
                           <option>2</option>
@@ -135,7 +167,10 @@ const Content = () => {
                     <div className='col-lg-3'>
                       <div className='form-group'>
                         <label className='mb-1'>Version</label>
-                        <select className='form-control'>
+                        <select
+                          className='form-control'
+                          onChange={onVersionChange}
+                        >
                           <option>All</option>
                           <option>1</option>
                           <option>2</option>
@@ -146,7 +181,10 @@ const Content = () => {
                     <div className='col-lg-3'>
                       <div className='form-group'>
                         <label className='mb-1'>Status</label>
-                        <select className='form-control'>
+                        <select
+                          className='form-control'
+                          onChange={onStatusChange}
+                        >
                           <option>All</option>
                           <option>1</option>
                           <option>2</option>
@@ -281,9 +319,9 @@ const Content = () => {
                   </div>
                 </div>
               </div>
-              <div className='table-responsive'>
+              <div className='table-responsive dataTables_wrapper'>
                 <table
-                  className='table table-hover responsive nowrap'
+                  className='table table-hover responsive nowrap dataTable'
                   id='sampleTable'
                 >
                   <thead>

@@ -7,7 +7,7 @@ import './App.css';
 
 const App = () => {
   return (
-    <div classNameName='app-page_wrapper'>
+    <div className='app-page_wrapper'>
       <Header />
       <LeftSideMenu />
       <RouteLoaderWrapper />
