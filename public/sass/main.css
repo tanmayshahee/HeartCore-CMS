@@ -5367,6 +5367,10 @@ input[type='button'].btn-block {
 .navbar-dark .navbar-nav .nav-link.active {
   color: #fff;
 }
+.nav-link.active {
+  border-color: #c01920 !important;
+  background-color: transparent !important;
+}
 
 .navbar-dark .navbar-toggler {
   color: rgba(255, 255, 255, 0.5);

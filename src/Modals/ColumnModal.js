@@ -33,7 +33,7 @@ const ColumnModal = (props) => {
             checked={column.isChecked}
             onClick={() => onCheckBoxClicked(column.name)}
           />
-          <label for={column.name} className='column-label'>
+          <label htmlFor={column.name} className='column-label'>
             {column.name}
           </label>
         </div>
@@ -59,7 +59,7 @@ const ColumnModal = (props) => {
         <div className='modal-footer'>
           <button
             type='button'
-            class='btn btn-outline-info'
+            className='btn btn-outline-info'
             onClick={props.onHide}
           >
             Close

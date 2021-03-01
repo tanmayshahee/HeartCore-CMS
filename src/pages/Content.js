@@ -30,11 +30,11 @@ const Content = () => {
               {item.pageName}
             </div>
           </td>
-          {columns[0].isChecked && <td>{item.id}</td>}
-          {columns[1].isChecked && <td>{item.group}</td>}
-          {columns[2].isChecked && <td>{item.type}</td>}
-          {columns[3].isChecked && <td>{item.version}</td>}
-          {columns[4].isChecked && (
+          <td>{item.id}</td>
+          {columns[0].isChecked && <td>{item.group}</td>}
+          {columns[1].isChecked && <td>{item.type}</td>}
+          {columns[2].isChecked && <td>{item.version}</td>}
+          {columns[3].isChecked && (
             <td>
               <span className='status status-published'>{item.status}</span>
               {item.dateTime}
@@ -46,19 +46,17 @@ const Content = () => {
               )}
             </td>
           )}
-          {columns[5].isChecked && (
-            <td className='preview-btn-container'>
-              <a href='/#' className='btn btn-outline-primary btn-sm'>
-                Preview
-              </a>
-              <a href='/#' className='btn btn-outline-primary btn-sm ml-2'>
-                Edit
-              </a>
-              <a href='/#' className='action-link ml-2'>
-                <img src='images/action-icon.svg' alt='' />
-              </a>
-            </td>
-          )}
+          <td className='preview-btn-container'>
+            <a href='/#' className='btn btn-outline-primary btn-sm'>
+              Preview
+            </a>
+            <a href='/#' className='btn btn-outline-primary btn-sm ml-2'>
+              Edit
+            </a>
+            <a href='/#' className='action-link ml-2'>
+              <img src='images/action-icon.svg' alt='' />
+            </a>
+          </td>
         </tr>
       );
     });
@@ -70,19 +68,31 @@ const Content = () => {
     });
   };
 
-  const onGroupChange = async (e) => {
-    console.log(e.target.selectedIndex);
-    //getFilteredData();
+  const renderColumnFilters = () => {
+    return columns.map((column) => {
+      return (
+        column.isChecked && (
+          <div className='col-lg-3'>
+            <div className='form-group'>
+              <label className='mb-1'>{column.name}</label>
+              <select
+                className='form-control'
+                onChange={(e) => onFilterValueChange(e, column.name)}
+              >
+                <option>All</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+              </select>
+            </div>
+          </div>
+        )
+      );
+    });
   };
-  const onTypeChange = async (e) => {
-    console.log(e.target.selectedIndex);
-    //getFilteredData();
-  };
-  const onVersionChange = async (e) => {
-    console.log(e.target.selectedIndex);
-    //getFilteredData();
-  };
-  const onStatusChange = async (e) => {
+
+  const onFilterValueChange = async (e, columnName) => {
+    console.log(columnName);
     console.log(e.target.selectedIndex);
     //getFilteredData();
   };
@@ -163,64 +173,7 @@ const Content = () => {
               >
                 <div className='row mt-3'>
                   <div className='col-xl-8'>
-                    <div className='row'>
-                      <div className='col-lg-3'>
-                        <div className='form-group'>
-                          <label className='mb-1'>Group</label>
-                          <select
-                            className='form-control'
-                            onChange={onGroupChange}
-                          >
-                            <option>All</option>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div className='col-lg-3'>
-                        <div className='form-group'>
-                          <label className='mb-1'>Type</label>
-                          <select
-                            className='form-control'
-                            onChange={onTypeChange}
-                          >
-                            <option>All</option>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div className='col-lg-3'>
-                        <div className='form-group'>
-                          <label className='mb-1'>Version</label>
-                          <select
-                            className='form-control'
-                            onChange={onVersionChange}
-                          >
-                            <option>All</option>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div className='col-lg-3'>
-                        <div className='form-group'>
-                          <label className='mb-1'>Status</label>
-                          <select
-                            className='form-control'
-                            onChange={onStatusChange}
-                          >
-                            <option>All</option>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
+                    <div className='row'>{renderColumnFilters()}</div>
                   </div>
                   <div className='col-xl-4'>
                     <div className='row justify-content-end'>
@@ -369,7 +322,9 @@ const Content = () => {
                         <th>Version</th>
                         <th>Status</th>
                         <th>Actions</th> */}
+                        <th>ID</th>
                         {renderColumnNames()}
+                        <th>Actions</th>
                       </tr>
                     </thead>
                     <tbody>{renderListItems()}</tbody>

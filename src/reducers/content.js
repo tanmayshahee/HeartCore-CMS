@@ -50,10 +50,6 @@ const initialState = {
   ],
   columns: [
     {
-      name: 'ID',
-      isChecked: true,
-    },
-    {
       name: 'Group',
       isChecked: true,
     },
@@ -67,10 +63,6 @@ const initialState = {
     },
     {
       name: 'Status',
-      isChecked: true,
-    },
-    {
-      name: 'Actions',
       isChecked: true,
     },
   ],
