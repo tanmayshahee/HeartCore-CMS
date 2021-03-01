@@ -17753,6 +17753,18 @@ div.form-control i {
   min-height: 300px;
 }
 
+.show-more-btn-wrapper {
+  position: relative;
+}
+.show-more-btn-wrapper .show-hide-col {
+  position: absolute;
+  top: 10px;
+  left: 15px;
+}
+.show-more-btn-wrapper .show-hide-col:hover {
+  cursor: pointer;
+}
+
 .login-content .login-box.flipped .login-form,
 .signup-content .login-box.flipped .login-form {
   opacity: 0;

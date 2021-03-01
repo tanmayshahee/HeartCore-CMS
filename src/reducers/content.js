@@ -1,3 +1,4 @@
+import ActionTypes from '../actionTypes';
 const initialState = {
   items: [
     {
@@ -47,10 +48,48 @@ const initialState = {
       dateTime: '2020-15-01, 15:05:26',
     },
   ],
+  columns: [
+    {
+      name: 'ID',
+      isChecked: true,
+    },
+    {
+      name: 'Group',
+      isChecked: true,
+    },
+    {
+      name: 'Type',
+      isChecked: true,
+    },
+    {
+      name: 'Version',
+      isChecked: true,
+    },
+    {
+      name: 'Status',
+      isChecked: true,
+    },
+    {
+      name: 'Actions',
+      isChecked: true,
+    },
+  ],
+  showColumnModal: false,
 };
 
 export const ContentReducer = (state = initialState, action) => {
-  switch (action.type) {
+  const { type, payload } = action;
+  switch (type) {
+    case ActionTypes.toggleColumnModal:
+      return {
+        ...state,
+        showColumnModal: payload,
+      };
+    case ActionTypes.saveColumnsToDisplay:
+      return {
+        ...state,
+        columns: payload,
+      };
     default:
       return state;
   }
