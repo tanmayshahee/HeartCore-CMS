@@ -1,22 +1,46 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getFilteredData } from '../services/contentApi';
-import { toggleColumnModal } from '../actions/content';
+import {
+  toggleColumnModal,
+  selectItem,
+  toggleAllItems,
+  fetchContent,
+  fetchFilterInfo,
+  setSelectedGroup,
+  setSelectedStatus,
+  setSelectedVersion,
+  setSelectedType,
+} from '../actions/content';
 import ColumnModal from '../Modals/ColumnModal';
 
 const Content = () => {
   const dispatch = useDispatch();
-  const { items, columns, showColumnModal } = useSelector(
-    (state) => state.content
-  );
+  const {
+    items,
+    columns,
+    showColumnModal,
+    allItemsChecked,
+    selectedGroup,
+    selectedType,
+    selectedVersion,
+    selectedStatus,
+  } = useSelector((state) => state.content);
 
   useEffect(() => {
-    getContentData();
+    fetchContent({
+      contentGroup: '',
+      contentType: '',
+      version: '',
+      status: '',
+    });
+    fetchFilterInfo();
   }, []);
 
-  const getContentData = async () => {
-    //Api call to fetch Data;
+  const onCheckBoxClicked = (itemId) => {
+    dispatch(selectItem(itemId));
   };
+
   const renderListItems = () => {
     return items.map((item) => {
       return (
@@ -24,15 +48,21 @@ const Content = () => {
           <td>
             <div className='animated-checkbox'>
               <label className='m-0'>
-                <input type='checkbox' />
+                <input
+                  type='checkbox'
+                  id={item.id}
+                  name={item.title}
+                  checked={item.isChecked}
+                  onClick={() => onCheckBoxClicked(item.id)}
+                />
                 <span className='label-text'></span>
               </label>
-              {item.pageName}
+              {item.title}
             </div>
           </td>
           <td>{item.id}</td>
-          {columns[0].isChecked && <td>{item.group}</td>}
-          {columns[1].isChecked && <td>{item.type}</td>}
+          {columns[0].isChecked && <td>{item.contentGroup}</td>}
+          {columns[1].isChecked && <td>{item.contentType}</td>}
           {columns[2].isChecked && <td>{item.version}</td>}
           {columns[3].isChecked && (
             <td>
@@ -79,10 +109,9 @@ const Content = () => {
                 className='form-control'
                 onChange={(e) => onFilterValueChange(e, column.name)}
               >
-                <option>All</option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
+                {column.options.map((option) => {
+                  return <option>{option}</option>;
+                })}
               </select>
             </div>
           </div>
@@ -94,11 +123,48 @@ const Content = () => {
   const onFilterValueChange = async (e, columnName) => {
     console.log(columnName);
     console.log(e.target.selectedIndex);
-    //getFilteredData();
+    let contentGroup = selectedGroup;
+    let contentType = selectedType;
+    let version = selectedVersion;
+    let status = selectedStatus;
+    const options = getOptions(columnName);
+    const selectedValue = options[e.target.selectedValue];
+    if (columnName === 'Group') {
+      contentGroup = selectedValue;
+      dispatch(setSelectedGroup(selectedValue));
+    } else if (columnName === 'Type') {
+      contentType = selectedValue;
+      dispatch(setSelectedType(selectedValue));
+    } else if (columnName === 'Version') {
+      version = selectedValue;
+      dispatch(setSelectedVersion(selectedValue));
+    } else if (columnName === 'Status') {
+      status = selectedValue;
+      dispatch(setSelectedStatus(selectedValue));
+    }
+    fetchContent({
+      contentGroup,
+      contentType,
+      version,
+      status,
+    });
+  };
+
+  const getOptions = (columnName) => {
+    const data = columns.filter((column) => {
+      if (column.name === columnName) {
+        return column;
+      }
+    });
+    return data[0].options;
   };
 
   const showHideColumnModal = (flag) => {
     dispatch(toggleColumnModal(flag));
+  };
+
+  const onSelectAllItems = () => {
+    dispatch(toggleAllItems());
   };
   return (
     <>
@@ -310,7 +376,13 @@ const Content = () => {
                         <th width='200px'>
                           <div className='animated-checkbox'>
                             <label className='m-0'>
-                              <input type='checkbox' />
+                              <input
+                                type='checkbox'
+                                id={'selectAll'}
+                                name={'selectAll'}
+                                checked={allItemsChecked}
+                                onClick={() => onSelectAllItems()}
+                              />
                               <span className='label-text'></span>
                             </label>
                             Page Name
