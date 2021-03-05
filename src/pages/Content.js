@@ -28,13 +28,15 @@ const Content = () => {
   } = useSelector((state) => state.content);
 
   useEffect(() => {
-    fetchContent({
-      contentGroup: '',
-      contentType: '',
-      version: '',
-      status: '',
-    });
-    fetchFilterInfo();
+    dispatch(
+      fetchContent({
+        contentGroup: '',
+        contentType: '',
+        version: '',
+        status: '',
+      })
+    );
+    dispatch(fetchFilterInfo());
   }, []);
 
   const onCheckBoxClicked = (itemId) => {
