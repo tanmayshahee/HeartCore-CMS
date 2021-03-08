@@ -57,6 +57,27 @@ export function toggleAllItems(payload) {
   };
 }
 
+export function setSelectedContentClass(payload) {
+  return {
+    type: ActionTypes.setSelectedContentClass,
+    payload,
+  };
+}
+
+export function toggleSortByIdDirection(payload) {
+  return {
+    type: ActionTypes.toggleSortByIdDirection,
+    payload,
+  };
+}
+
+export function toggleSortDirectionOfColumn(payload) {
+  return {
+    type: ActionTypes.toggleSortDirectionOfColumn,
+    payload,
+  };
+}
+
 export const fetchContent = (reqData) => {
   return async function (dispatch) {
     const responseData = await axios.post(
@@ -80,6 +101,7 @@ export const fetchFilterInfo = () => {
         name: 'Group',
         options: responseData.data.contentGroup,
         isChecked: true,
+        sortBy: 'asc',
       });
     }
     if (responseData.data.contentType) {
@@ -87,6 +109,7 @@ export const fetchFilterInfo = () => {
         name: 'Type',
         options: responseData.data.contentType,
         isChecked: true,
+        sortBy: 'asc',
       });
     }
     if (responseData.data.contentVersion) {
@@ -94,6 +117,7 @@ export const fetchFilterInfo = () => {
         name: 'Version',
         options: responseData.data.contentVersion,
         isChecked: true,
+        sortBy: 'asc',
       });
     }
     if (responseData.data.contentStatus) {
@@ -101,6 +125,7 @@ export const fetchFilterInfo = () => {
         name: 'Status',
         options: responseData.data.contentStatus,
         isChecked: true,
+        sortBy: 'asc',
       });
     }
 
@@ -115,7 +140,7 @@ function setFilters(payload) {
   };
 }
 
-function setContent(payload) {
+export function setContent(payload) {
   return {
     type: ActionTypes.setContent,
     payload,

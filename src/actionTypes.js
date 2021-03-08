@@ -9,6 +9,9 @@ const actionTypes = {
   setSelectedType: 'setSelectedType',
   setSelectedVersion: 'setSelectedVersion',
   setSelectedStatus: 'setSelectedStatus',
+  setSelectedContentClass: 'setSelectedContentClass',
+  toggleSortByIdDirection: 'toggleSortByIdDirection',
+  toggleSortDirectionOfColumn: 'toggleSortDirectionOfColumn',
 };
 
 export default actionTypes;

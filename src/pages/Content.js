@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getFilteredData } from '../services/contentApi';
+import './content.scss';
 import {
   toggleColumnModal,
   selectItem,
@@ -11,6 +11,10 @@ import {
   setSelectedStatus,
   setSelectedVersion,
   setSelectedType,
+  setSelectedContentClass,
+  toggleSortByIdDirection,
+  toggleSortDirectionOfColumn,
+  setContent,
 } from '../actions/content';
 import ColumnModal from '../Modals/ColumnModal';
 
@@ -25,6 +29,8 @@ const Content = () => {
     selectedType,
     selectedVersion,
     selectedStatus,
+    selectedContentClass,
+    sortById,
   } = useSelector((state) => state.content);
 
   useEffect(() => {
@@ -34,6 +40,7 @@ const Content = () => {
         contentType: '',
         version: '',
         status: '',
+        contentclass: selectedContentClass,
       })
     );
     dispatch(fetchFilterInfo());
@@ -54,7 +61,7 @@ const Content = () => {
                   type='checkbox'
                   id={item.id}
                   name={item.title}
-                  checked={item.isChecked}
+                  checked={item.isChecked || false}
                   onClick={() => onCheckBoxClicked(item.id)}
                 />
                 <span className='label-text'></span>
@@ -63,10 +70,10 @@ const Content = () => {
             </div>
           </td>
           <td>{item.id}</td>
-          {columns[0].isChecked && <td>{item.contentGroup}</td>}
-          {columns[1].isChecked && <td>{item.contentType}</td>}
-          {columns[2].isChecked && <td>{item.version}</td>}
-          {columns[3].isChecked && (
+          {columns[0] && columns[0].isChecked && <td>{item.contentGroup}</td>}
+          {columns[1] && columns[1].isChecked && <td>{item.contentType}</td>}
+          {columns[2] && columns[2].isChecked && <td>{item.version}</td>}
+          {columns[3] && columns[3].isChecked && (
             <td>
               <span className='status status-published'>{item.status}</span>
               {item.dateTime}
@@ -96,7 +103,21 @@ const Content = () => {
 
   const renderColumnNames = () => {
     return columns.map((column) => {
-      return column.isChecked && <th>{column.name}</th>;
+      return (
+        column.isChecked && (
+          <th
+            className='column-name'
+            onClick={() => sortColumnValue(column.name)}
+          >
+            {column.name}{' '}
+            {column.sortBy === 'asc' ? (
+              <i className='log-i log-icon-angle-down-solid sort-icon'></i>
+            ) : (
+              <i className='log-i log-icon-angle-up-solid sort-icon'></i>
+            )}
+          </th>
+        )
+      );
     });
   };
 
@@ -130,7 +151,7 @@ const Content = () => {
     let version = selectedVersion;
     let status = selectedStatus;
     const options = getOptions(columnName);
-    const selectedValue = options[e.target.selectedValue];
+    const selectedValue = options[e.target.selectedIndex];
     if (columnName === 'Group') {
       contentGroup = selectedValue;
       dispatch(setSelectedGroup(selectedValue));
@@ -144,12 +165,15 @@ const Content = () => {
       status = selectedValue;
       dispatch(setSelectedStatus(selectedValue));
     }
-    fetchContent({
-      contentGroup,
-      contentType,
-      version,
-      status,
-    });
+    dispatch(
+      fetchContent({
+        contentGroup,
+        contentType,
+        version,
+        status,
+        contentClass: selectedContentClass,
+      })
+    );
   };
 
   const getOptions = (columnName) => {
@@ -161,12 +185,97 @@ const Content = () => {
     return data[0].options;
   };
 
+  const getDirection = (columnName) => {
+    const data = columns.filter((column) => {
+      if (column.name === columnName) {
+        return column;
+      }
+    });
+    return data[0].sortBy;
+  };
+
   const showHideColumnModal = (flag) => {
     dispatch(toggleColumnModal(flag));
   };
 
   const onSelectAllItems = () => {
     dispatch(toggleAllItems());
+  };
+
+  const onTabChange = (contentClass) => {
+    console.log(contentClass);
+    dispatch(setSelectedContentClass(contentClass));
+    dispatch(
+      fetchContent({
+        contentGroup: selectedGroup,
+        contentType: selectedType,
+        version: selectedVersion,
+        status: selectedStatus,
+        contentClass: contentClass,
+      })
+    );
+  };
+
+  const sortColumnValue = (columnName) => {
+    if (columnName === 'id') {
+      dispatch(toggleSortByIdDirection());
+      const sortDirection = sortById === 'asc' ? 'desc' : 'asc';
+      sortID(sortDirection);
+    } else {
+      sortContent(columnName);
+      dispatch(toggleSortDirectionOfColumn(columnName));
+    }
+  };
+
+  const sortContent = (columnName) => {
+    let sortKey = 'contentGroup';
+    let sortDirection = 'asc';
+    let oldDirection = 'asc';
+    if (columnName === 'Group') {
+      sortKey = 'contentGroup';
+      oldDirection = getDirection(columnName);
+      sortDirection = oldDirection === 'asc' ? 'desc' : 'asc';
+    } else if (columnName === 'Type') {
+      sortKey = 'contentType';
+      oldDirection = getDirection(columnName);
+      sortDirection = oldDirection === 'asc' ? 'desc' : 'asc';
+    } else if (columnName === 'Version') {
+      sortKey = 'version';
+      oldDirection = getDirection(columnName);
+      sortDirection = oldDirection === 'asc' ? 'desc' : 'asc';
+    } else if (columnName === 'Status') {
+      sortKey = 'status';
+      oldDirection = getDirection(columnName);
+      sortDirection = oldDirection === 'asc' ? 'desc' : 'asc';
+    }
+
+    sortContentByDirection(sortDirection, sortKey);
+  };
+
+  const sortContentByDirection = (sortDirection, sortKey) => {
+    if (sortDirection === 'asc') {
+      items.sort((item1, item2) => {
+        return item1[sortKey].localeCompare(item2[sortKey]);
+      });
+    } else {
+      items.sort((item1, item2) => {
+        return item2[sortKey].localeCompare(item1[sortKey]);
+      });
+    }
+    dispatch(setContent(items));
+  };
+
+  const sortID = (sortDirection) => {
+    if (sortDirection === 'asc') {
+      items.sort((item1, item2) => {
+        return item1.id - item2.id;
+      });
+    } else {
+      items.sort((item1, item2) => {
+        return item2.id - item1.id;
+      });
+    }
+    dispatch(setContent(items));
   };
   return (
     <>
@@ -192,43 +301,89 @@ const Content = () => {
         <div className='row'>
           <div className='col-md-12'>
             <ul className='nav nav-tabs' id='myTab' role='tablist'>
-              <li className='nav-item' role='presentation'>
+              <li
+                className='nav-item'
+                role='presentation'
+                onClick={() => onTabChange('page')}
+              >
                 <a
                   className='nav-link active'
-                  id='home-tab'
+                  id='pages-tab'
                   data-toggle='tab'
                   href='/#home'
                   role='tab'
                   aria-controls='home'
                   aria-selected='true'
                 >
-                  Home
+                  Pages
                 </a>
               </li>
-              <li className='nav-item' role='presentation'>
+              <li
+                className='nav-item'
+                role='presentation'
+                onClick={() => onTabChange('element')}
+              >
                 <a
                   className='nav-link'
-                  id='profile-tab'
+                  id='elements-tab'
                   data-toggle='tab'
                   href='/#profile'
                   role='tab'
                   aria-controls='profile'
                   aria-selected='false'
                 >
-                  Profile
+                  Elements
                 </a>
               </li>
-              <li className='nav-item' role='presentation'>
+              <li
+                className='nav-item'
+                role='presentation'
+                onClick={() => onTabChange('template')}
+              >
                 <a
                   className='nav-link'
-                  id='contact-tab'
+                  id='templates-tab'
                   data-toggle='tab'
                   href='/#contact'
                   role='tab'
                   aria-controls='contact'
                   aria-selected='false'
                 >
-                  Contact
+                  Templates
+                </a>
+              </li>
+              <li
+                className='nav-item'
+                role='presentation'
+                onClick={() => onTabChange('stylesheet')}
+              >
+                <a
+                  className='nav-link'
+                  id='style-tab'
+                  data-toggle='tab'
+                  href='/#profile'
+                  role='tab'
+                  aria-controls='profile'
+                  aria-selected='false'
+                >
+                  Style Sheets
+                </a>
+              </li>
+              <li
+                className='nav-item'
+                role='presentation'
+                onClick={() => onTabChange('script')}
+              >
+                <a
+                  className='nav-link'
+                  id='scripts-tab'
+                  data-toggle='tab'
+                  href='/#profile'
+                  role='tab'
+                  aria-controls='profile'
+                  aria-selected='false'
+                >
+                  Scripts
                 </a>
               </li>
             </ul>
@@ -375,7 +530,7 @@ const Content = () => {
                   >
                     <thead>
                       <tr>
-                        <th width='200px'>
+                        <th width='200px' className='column-name'>
                           <div className='animated-checkbox'>
                             <label className='m-0'>
                               <input
@@ -388,6 +543,7 @@ const Content = () => {
                               <span className='label-text'></span>
                             </label>
                             Page Name
+                            <i className='log-i log-icon-angle-down-solid sort-icon'></i>
                           </div>
                         </th>
                         {/* <th>ID</th>
@@ -396,9 +552,21 @@ const Content = () => {
                         <th>Version</th>
                         <th>Status</th>
                         <th>Actions</th> */}
-                        <th>ID</th>
+                        <th
+                          className='column-name'
+                          onClick={() => {
+                            sortColumnValue('id');
+                          }}
+                        >
+                          ID{' '}
+                          {sortById === 'asc' ? (
+                            <i className='log-i log-icon-angle-down-solid sort-icon'></i>
+                          ) : (
+                            <i className='log-i log-icon-angle-up-solid sort-icon'></i>
+                          )}
+                        </th>
                         {renderColumnNames()}
-                        <th>Actions</th>
+                        <th className='column-name'>Actions</th>
                       </tr>
                     </thead>
                     <tbody>{renderListItems()}</tbody>

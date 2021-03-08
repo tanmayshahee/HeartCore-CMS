@@ -2,52 +2,52 @@ import ActionTypes from '../actionTypes';
 const initialState = {
   // items: [
   //   {
-  //     pageName: 'Page 1',
+  //     title: 'Page 1',
   //     id: 182,
-  //     group: 'Home',
-  //     type: 'Special',
+  //     contentGroup: 'Home',
+  //     contentType: 'Special',
   //     version: 'Spanish',
   //     status: 'Published',
   //     dateTime: '2020-15-01, 15:05:26',
   //     isChecked: false,
   //   },
   //   {
-  //     pageName: 'Page 2',
+  //     title: 'Page 2',
   //     id: 183,
-  //     group: 'Home',
-  //     type: 'Special',
-  //     version: 'Spanish',
+  //     contentGroup: 'Away',
+  //     contentType: 'New Special',
+  //     version: 'Japanese',
   //     status: 'Published',
   //     dateTime: '2020-15-01, 15:05:26',
   //     isChecked: false,
   //   },
   //   {
-  //     pageName: 'Page 3',
+  //     title: 'Page 3',
   //     id: 184,
-  //     group: 'Home',
-  //     type: 'Special',
-  //     version: 'Spanish',
+  //     contentGroup: 'New Home',
+  //     contentType: 'Very New Special',
+  //     version: 'German',
   //     status: 'Published',
   //     dateTime: '2020-15-01, 15:05:26',
   //     isHomePage: true,
   //     isChecked: false,
   //   },
   //   {
-  //     pageName: 'Page 4',
+  //     title: 'Page 4',
   //     id: 185,
-  //     group: 'Home',
-  //     type: 'Special',
-  //     version: 'Spanish',
+  //     contentGroup: 'Raw Home',
+  //     contentType: 'Old Special',
+  //     version: 'Russian',
   //     status: 'Published',
   //     dateTime: '2020-15-01, 15:05:26',
   //     isChecked: false,
   //   },
   //   {
-  //     pageName: 'Page 5',
+  //     title: 'Page 5',
   //     id: 186,
-  //     group: 'Home',
-  //     type: 'Special',
-  //     version: 'Spanish',
+  //     contentGroup: 'Old Home',
+  //     contentType: 'Raw Special',
+  //     version: 'Indian',
   //     status: 'Published',
   //     dateTime: '2020-15-01, 15:05:26',
   //     isChecked: false,
@@ -58,32 +58,64 @@ const initialState = {
   //   {
   //     name: 'Group',
   //     isChecked: true,
+  //     options: [],
+  //     sortBy: 'asc',
   //   },
   //   {
   //     name: 'Type',
   //     isChecked: true,
+  //     options: [],
+  //     sortBy: 'asc',
   //   },
   //   {
   //     name: 'Version',
   //     isChecked: true,
+  //     options: [],
+  //     sortBy: 'asc',
   //   },
   //   {
   //     name: 'Status',
   //     isChecked: true,
+  //     options: [],
+  //     sortBy: 'asc',
   //   },
   // ],
   selectedGroup: '',
   selectedType: '',
   selectedVersion: '',
   selectedStatus: '',
+  selectedContentClass: 'page',
   columns: [],
   allItemsChecked: false,
   showColumnModal: false,
+  sortById: 'asc',
 };
 
 export const ContentReducer = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
+    case ActionTypes.toggleSortDirectionOfColumn: {
+      return {
+        ...state,
+        columns: state.columns.map((column) => {
+          if (column.name === payload) {
+            column.sortBy = column.sortBy === 'asc' ? 'desc' : 'asc';
+          }
+          return column;
+        }),
+      };
+    }
+    case ActionTypes.toggleSortByIdDirection: {
+      return {
+        ...state,
+        sortById: state.sortById === 'asc' ? 'desc' : 'asc',
+      };
+    }
+    case ActionTypes.setSelectedContentClass:
+      return {
+        ...state,
+        selectedContentClass: payload,
+      };
     case ActionTypes.setSelectedGroup:
       return {
         ...state,
