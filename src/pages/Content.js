@@ -85,6 +85,9 @@ const Content = () => {
               )}
             </td>
           )}
+          {columns[4] &&
+            columns[4].isChecked &&
+            selectedContentClass === 'element' && <td>{item.contentclass}</td>}
           <td className='preview-btn-container'>
             <a href='/#' className='btn btn-outline-primary btn-sm'>
               Preview
@@ -104,7 +107,9 @@ const Content = () => {
   const renderColumnNames = () => {
     return columns.map((column) => {
       return (
-        column.isChecked && (
+        column.isChecked &&
+        (selectedContentClass !== 'element' &&
+        column.name === 'ContentClass' ? null : (
           <th
             className='column-name'
             onClick={() => sortColumnValue(column.name)}
@@ -116,7 +121,7 @@ const Content = () => {
               <i className='log-i log-icon-angle-up-solid sort-icon'></i>
             )}
           </th>
-        )
+        ))
       );
     });
   };
@@ -124,7 +129,9 @@ const Content = () => {
   const renderColumnFilters = () => {
     return columns.map((column) => {
       return (
-        column.isChecked && (
+        column.isChecked &&
+        (selectedContentClass !== 'element' &&
+        column.name === 'ContentClass' ? null : (
           <div className='col-lg-3'>
             <div className='form-group'>
               <label className='mb-1'>{column.name}</label>
@@ -138,7 +145,7 @@ const Content = () => {
               </select>
             </div>
           </div>
-        )
+        ))
       );
     });
   };
@@ -150,6 +157,7 @@ const Content = () => {
     let contentType = selectedType;
     let version = selectedVersion;
     let status = selectedStatus;
+    let contentClass = selectedContentClass;
     const options = getOptions(columnName);
     const selectedValue = options[e.target.selectedIndex];
     if (columnName === 'Group') {
@@ -164,6 +172,9 @@ const Content = () => {
     } else if (columnName === 'Status') {
       status = selectedValue;
       dispatch(setSelectedStatus(selectedValue));
+    } else if (columnName === 'ContentClass') {
+      contentClass = selectedValue;
+      dispatch(setSelectedStatus(selectedValue));
     }
     dispatch(
       fetchContent({
@@ -171,7 +182,7 @@ const Content = () => {
         contentType,
         version,
         status,
-        contentClass: selectedContentClass,
+        contentClass,
       })
     );
   };
@@ -245,6 +256,10 @@ const Content = () => {
       sortDirection = oldDirection === 'asc' ? 'desc' : 'asc';
     } else if (columnName === 'Status') {
       sortKey = 'status';
+      oldDirection = getDirection(columnName);
+      sortDirection = oldDirection === 'asc' ? 'desc' : 'asc';
+    } else if (columnName === 'ContentClass') {
+      sortKey = 'contentclass';
       oldDirection = getDirection(columnName);
       sortDirection = oldDirection === 'asc' ? 'desc' : 'asc';
     }
@@ -542,16 +557,14 @@ const Content = () => {
                               />
                               <span className='label-text'></span>
                             </label>
-                            Page Name
+                            {`${
+                              selectedContentClass === 'element'
+                                ? 'Element'
+                                : 'Page Name'
+                            }`}
                             <i className='log-i log-icon-angle-down-solid sort-icon'></i>
                           </div>
                         </th>
-                        {/* <th>ID</th>
-                        <th>Group</th>
-                        <th>Type</th>
-                        <th>Version</th>
-                        <th>Status</th>
-                        <th>Actions</th> */}
                         <th
                           className='column-name'
                           onClick={() => {

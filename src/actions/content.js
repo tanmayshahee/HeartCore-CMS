@@ -128,6 +128,14 @@ export const fetchFilterInfo = () => {
         sortBy: 'asc',
       });
     }
+    if (responseData.data.contentClass) {
+      filterArr.push({
+        name: 'ContentClass',
+        options: responseData.data.contentClass,
+        isChecked: true,
+        sortBy: 'asc',
+      });
+    }
 
     dispatch(setFilters(filterArr));
   };
