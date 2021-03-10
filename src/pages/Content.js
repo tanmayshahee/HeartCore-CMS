@@ -76,7 +76,7 @@ const Content = () => {
           {columns[3] && columns[3].isChecked && (
             <td>
               <span className='status status-published'>{item.status}</span>
-              {item.dateTime}
+              {/* <span className='date-time'>{item.dateTime}</span> */}
               {item.isHomePage && (
                 <span className='status status-homepage'>
                   <i className='fa fa-home' aria-hidden='true'></i>
@@ -545,7 +545,7 @@ const Content = () => {
                   >
                     <thead>
                       <tr>
-                        <th width='200px' className='column-name'>
+                        <th className='column-name'>
                           <div className='animated-checkbox'>
                             <label className='m-0'>
                               <input
