@@ -24,4 +24,10 @@
       table-layout: fixed;
     }
   }
+  .page-title {
+    display: inline-block;
+    box-sizing: border-box;
+    white-space: pre-line;
+    word-wrap: break-word;
+  }
 }

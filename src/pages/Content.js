@@ -66,7 +66,7 @@ const Content = () => {
                 />
                 <span className='label-text'></span>
               </label>
-              {item.title}
+              <span className='page-title'>{item.title}</span>
             </div>
           </td>
           <td>{item.id}</td>
