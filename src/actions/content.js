@@ -64,6 +64,13 @@ export function setSelectedContentClass(payload) {
   };
 }
 
+export function setSelectedContentClassTab(payload) {
+  return {
+    type: ActionTypes.setSelectedContentClassTab,
+    payload,
+  };
+}
+
 export function toggleSortByIdDirection(payload) {
   return {
     type: ActionTypes.toggleSortByIdDirection,

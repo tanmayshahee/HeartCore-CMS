@@ -10,6 +10,7 @@ const actionTypes = {
   setSelectedVersion: 'setSelectedVersion',
   setSelectedStatus: 'setSelectedStatus',
   setSelectedContentClass: 'setSelectedContentClass',
+  setSelectedContentClassTab: 'setSelectedContentClassTab',
   toggleSortByIdDirection: 'toggleSortByIdDirection',
   toggleSortDirectionOfColumn: 'toggleSortDirectionOfColumn',
 };

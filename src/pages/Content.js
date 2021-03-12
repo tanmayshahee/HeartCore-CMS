@@ -12,6 +12,7 @@ import {
   setSelectedVersion,
   setSelectedType,
   setSelectedContentClass,
+  setSelectedContentClassTab,
   toggleSortByIdDirection,
   toggleSortDirectionOfColumn,
   setContent,
@@ -30,6 +31,7 @@ const Content = () => {
     selectedVersion,
     selectedStatus,
     selectedContentClass,
+    selectedContentClassTab,
     sortById,
   } = useSelector((state) => state.content);
 
@@ -48,7 +50,8 @@ const Content = () => {
         contentType: '',
         version: '',
         status: '',
-        contentClass: selectedContentClass,
+        contentClass: '',
+        contentClassTab: selectedContentClassTab,
       })
     );
     dispatch(fetchFilterInfo());
@@ -95,7 +98,9 @@ const Content = () => {
           )}
           {columns[4] &&
             columns[4].isChecked &&
-            selectedContentClass === 'element' && <td>{item.contentclass}</td>}
+            selectedContentClassTab === 'element' && (
+              <td>{item.contentclass}</td>
+            )}
           <td className='preview-btn-container'>
             <a
               href={`http://localhost:8080/page.jsp?mode=preview&id=${item.id}`}
@@ -121,7 +126,7 @@ const Content = () => {
     return columns.map((column) => {
       return (
         column.isChecked &&
-        (selectedContentClass !== 'element' &&
+        (selectedContentClassTab !== 'element' &&
         column.name === 'ContentClass' ? null : (
           <th
             className='column-name'
@@ -143,7 +148,7 @@ const Content = () => {
     return columns.map((column) => {
       return (
         column.isChecked &&
-        (selectedContentClass !== 'element' &&
+        (selectedContentClassTab !== 'element' &&
         column.name === 'ContentClass' ? null : (
           <div className='col-lg-3'>
             <div className='form-group'>
@@ -187,7 +192,7 @@ const Content = () => {
       dispatch(setSelectedStatus(selectedValue));
     } else if (columnName === 'ContentClass') {
       contentClass = selectedValue;
-      dispatch(setSelectedStatus(selectedValue));
+      dispatch(setSelectedContentClass(selectedValue));
     }
     dispatch(
       fetchContent({
@@ -196,6 +201,7 @@ const Content = () => {
         version,
         status,
         contentClass,
+        contentClassTab: selectedContentClassTab,
       })
     );
   };
@@ -226,16 +232,17 @@ const Content = () => {
     dispatch(toggleAllItems());
   };
 
-  const onTabChange = (contentClass) => {
-    console.log(contentClass);
-    dispatch(setSelectedContentClass(contentClass));
+  const onTabChange = (contentClassTab) => {
+    console.log(contentClassTab);
+    dispatch(setSelectedContentClassTab(contentClassTab));
     dispatch(
       fetchContent({
         contentGroup: selectedGroup,
         contentType: selectedType,
         version: selectedVersion,
         status: selectedStatus,
-        contentClass: contentClass,
+        contentClass: selectedContentClass,
+        contentClassTab: contentClassTab,
       })
     );
   };
@@ -574,7 +581,7 @@ const Content = () => {
                               />
                               <span className='label-text'></span>
                             </label>
-                            {getColumnTitleBasedOnTab(selectedContentClass)}
+                            {getColumnTitleBasedOnTab(selectedContentClassTab)}
                             <i className='log-i log-icon-angle-down-solid sort-icon'></i>
                           </div>
                         </th>
