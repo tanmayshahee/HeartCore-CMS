@@ -33,6 +33,14 @@ const Content = () => {
     sortById,
   } = useSelector((state) => state.content);
 
+  const columnTitle = {
+    page: 'Page Name',
+    element: 'Element',
+    template: 'Template',
+    stylesheet: 'Style Sheet',
+    script: 'Script',
+  };
+
   useEffect(() => {
     dispatch(
       fetchContent({
@@ -40,7 +48,7 @@ const Content = () => {
         contentType: '',
         version: '',
         status: '',
-        contentclass: selectedContentClass,
+        contentClass: selectedContentClass,
       })
     );
     dispatch(fetchFilterInfo());
@@ -89,7 +97,12 @@ const Content = () => {
             columns[4].isChecked &&
             selectedContentClass === 'element' && <td>{item.contentclass}</td>}
           <td className='preview-btn-container'>
-            <a href='/#' className='btn btn-outline-primary btn-sm'>
+            <a
+              href={`http://localhost:8080/page.jsp?mode=preview&id=${item.id}`}
+              className='btn btn-outline-primary btn-sm'
+              target='_blank'
+              rel='noreferrer'
+            >
               Preview
             </a>
             <a href='/#' className='btn btn-outline-primary btn-sm ml-2'>
@@ -291,6 +304,10 @@ const Content = () => {
       });
     }
     dispatch(setContent(items));
+  };
+
+  const getColumnTitleBasedOnTab = (tabKey) => {
+    return columnTitle[tabKey];
   };
   return (
     <>
@@ -557,11 +574,7 @@ const Content = () => {
                               />
                               <span className='label-text'></span>
                             </label>
-                            {`${
-                              selectedContentClass === 'element'
-                                ? 'Element'
-                                : 'Page Name'
-                            }`}
+                            {getColumnTitleBasedOnTab(selectedContentClass)}
                             <i className='log-i log-icon-angle-down-solid sort-icon'></i>
                           </div>
                         </th>
