@@ -1,8 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const LeftSideMenu = () => {
   const [selectedMenuItem, setSelectedMenuItem] = useState('');
+  const history = useHistory();
+
+  useEffect(() => {
+    console.log(history);
+    if (history.location.pathname === '/content') {
+      setSelectedMenuItem('content');
+    } else if (history.location.pathname === '/') {
+      setSelectedMenuItem('dashboard');
+    }
+  }, []);
   const onMenuItemClick = (menuItem) => {
     setSelectedMenuItem(menuItem);
   };
@@ -12,14 +23,20 @@ const LeftSideMenu = () => {
       <aside className='app-sidebar'>
         <ul className='app-menu'>
           <li>
-            <a className='app-menu__item app-menu__caption' href='/#'>
-              <img
-                src='images/dashboard.svg'
-                className='app-menu__icon log-i log-icon-dashboard'
-                alt=''
-              />
-              <span className='app-menu__label'>Dashboard</span>
-            </a>
+            <Link to='/' onClick={() => onMenuItemClick('dashboard')}>
+              <div
+                className={`app-menu__item app-menu__caption ${
+                  selectedMenuItem === 'dashboard' ? 'active' : ''
+                }`}
+              >
+                <img
+                  src='images/dashboard.svg'
+                  className='app-menu__icon log-i log-icon-dashboard'
+                  alt=''
+                />
+                <span className='app-menu__label'>Dashboard</span>
+              </div>
+            </Link>
           </li>
           <li>
             <a className='app-menu__item app-menu__caption' href='/#'>

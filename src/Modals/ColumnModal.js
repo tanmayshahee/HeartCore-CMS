@@ -53,7 +53,7 @@ const ColumnModal = (props) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <div class='modal-body'>{renderColumnNames()}</div>
+        <div className='modal-body'>{renderColumnNames()}</div>
       </Modal.Body>
       <Modal.Footer>
         <div className='modal-footer'>

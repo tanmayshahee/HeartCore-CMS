@@ -24,10 +24,17 @@
       table-layout: fixed;
     }
   }
+  .status-main,
   .page-title {
-    display: inline-block;
+    // display: inline-block;
     box-sizing: border-box;
-    white-space: pre-line;
+    white-space: pre-line !important;
     word-wrap: break-word;
   }
+}
+
+.btn-primary {
+  color: #fff !important;
+  background-color: #c01920 !important;
+  border-color: #c01920 !important;
 }
