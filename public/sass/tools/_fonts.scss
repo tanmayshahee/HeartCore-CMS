@@ -4,35 +4,33 @@
 
 @font-face {
   font-family: 'Systemize-Logistics';
-  src: url('../fonts/Systemize-Logistics.eot?yx8hhx');
-  src: url('../fonts/Systemize-Logistics.eot?yx8hhx#iefix')
-      format('embedded-opentype'),
+  src:  url('../fonts/Systemize-Logistics.eot?yx8hhx');
+  src:  url('../fonts/Systemize-Logistics.eot?yx8hhx#iefix') format('embedded-opentype'),
     url('../fonts/Systemize-Logistics.ttf?yx8hhx') format('truetype'),
     url('../fonts/Systemize-Logistics.woff?yx8hhx') format('woff'),
-    url('../fonts/Systemize-Logistics.svg?yx8hhx#Systemize-Logistics')
-      format('svg');
+    url('../fonts/Systemize-Logistics.svg?yx8hhx#Systemize-Logistics') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
 }
-
+  
 .log-i {
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  display: inline-block;
-  font-style: normal;
-  font-variant: normal;
-  text-rendering: auto;
-  line-height: 1;
-  font-family: 'wardrobeicon' !important;
-  vertical-align: middle;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+    font-family: 'wardrobeicon' !important;
+    vertical-align: middle;
 }
 .log-i-small {
-  font-size: 18px !important;
+    font-size: 18px !important;
 }
 
-[class^='log-'],
-[class*=' log-'] {
+
+[class^="log-"], [class*=" log-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'Systemize-Logistics' !important;
   speak: never;
@@ -47,131 +45,131 @@
   -moz-osx-font-smoothing: grayscale;
 }
 .log-icon-settings:before {
-  content: '\e91b';
+  content: "\e91b";
 }
 .log-icon-gas-station:before {
-  content: '\e91c';
+  content: "\e91c";
 }
 .log-icon-shift-report:before {
-  content: '\e91d';
+  content: "\e91d";
 }
 .log-icon-minus-light:before {
-  content: '\e90f';
+  content: "\e90f";
 }
 .log-icon-plus-light:before {
-  content: '\e91a';
+  content: "\e91a";
 }
 .log-icon-calendar-solid:before {
-  content: '\e918';
+  content: "\e918";
 }
 .log-icon-clock:before {
-  content: '\e919';
+  content: "\e919";
 }
 .log-icon-menu:before {
-  content: '\e917';
+  content: "\e917";
 }
 .log-icon-role:before {
-  content: '\e906';
+  content: "\e906";
 }
 .log-icon-import:before {
-  content: '\e901';
+  content: "\e901";
 }
 .log-icon-left-light:before {
-  content: '\e910';
+  content: "\e910";
 }
 .log-icon-export:before {
-  content: '\e904';
+  content: "\e904";
 }
 .log-icon-filter:before {
-  content: '\e90b';
+  content: "\e90b";
 }
 .log-icon-right-solid:before {
-  content: '\e911';
+  content: "\e911";
 }
 .log-icon-reports:before {
-  content: '\e912';
+  content: "\e912";
 }
 .log-icon-dashboard:before {
-  content: '\e913';
+  content: "\e913";
 }
 .log-icon-users:before {
-  content: '\e914';
+  content: "\e914";
 }
 .log-icon-log-sheet:before {
-  content: '\e915';
+  content: "\e915";
 }
 .log-icon-assets:before {
-  content: '\e916';
+  content: "\e916";
 }
 .log-icon-mapping:before {
-  content: '\e909';
+  content: "\e909";
 }
 .log-icon-success-solid:before {
-  content: '\e90a';
+  content: "\e90a";
 }
 .log-icon-error:before {
-  content: '\e90c';
+  content: "\e90c";
 }
 .log-icon-unsuccessful:before {
-  content: '\e90d';
+  content: "\e90d";
 }
 .log-icon-success:before {
-  content: '\e90e';
+  content: "\e90e";
 }
 .log-icon-times-circle:before {
-  content: '\e907';
+  content: "\e907";
 }
 .log-icon-plus-circle-solid:before {
-  content: '\e908';
+  content: "\e908";
 }
 .log-icon-report:before {
-  content: '\e900';
+  content: "\e900";
   color: #2e3b57;
 }
 .log-icon-relate:before {
-  content: '\e902';
+  content: "\e902";
   color: #2e3b57;
 }
 .log-icon-master:before {
-  content: '\e903';
+  content: "\e903";
   color: #2e3b57;
 }
 .log-icon-user-large:before {
-  content: '\e905';
+  content: "\e905";
 }
 .log-icon-file-pdf:before {
-  content: '\e812';
+  content: "\e812";
 }
 .log-icon-dot:before {
-  content: '\e811';
+  content: "\e811";
 }
 .log-icon-angle-down-solid:before {
-  content: '\e800';
+  content: "\e800";
 }
 .log-icon-angle-left-solid:before {
-  content: '\e801';
+  content: "\e801";
 }
 .log-icon-angle-right-solid:before {
-  content: '\e802';
+  content: "\e802";
 }
 .log-icon-angle-up-solid:before {
-  content: '\e803';
+  content: "\e803";
 }
 .log-icon-user:before {
-  content: '\e804';
+  content: "\e804";
 }
 .log-icon-search-solid:before {
-  content: '\e805';
+  content: "\e805";
 }
 .log-icon-plus-solid:before {
-  content: '\e806';
+  content: "\e806";
 }
 .log-icon-eye-solid:before {
-  content: '\e807';
+  content: "\e807";
 }
 .log-icon-pen-solid:before {
-  content: '\e808';
+  content: "\e808";
 }
 .log-icon-trash-solid:before {
-  content: '\e809';
+  content: "\e809";
 }

@@ -270,6 +270,10 @@
     .nav-link.active {
       color: $navbar-dark-active-color;
     }
+    .nav-link.active {
+      border-color: #c01920 !important;
+      background-color: transparent !important;
+    }
   }
 
   .navbar-toggler {
