@@ -9,19 +9,19 @@
   }
   table {
     tbody {
-      display: block;
-      max-height: 400px;
-      overflow: auto;
+      // display: block;
+      // max-height: 400px;
+      // overflow: auto;
       tr {
-        display: table;
-        width: 100%;
-        table-layout: fixed;
+        // display: table;
+        // width: 100%;
+        // table-layout: fixed;
       }
     }
     thead {
-      display: table;
-      width: 100%;
-      table-layout: fixed;
+      // display: table;
+      // width: 100%;
+      // table-layout: fixed;
     }
   }
   .status-main,
@@ -50,6 +50,7 @@
 
 .nav-tabs {
   .nav-link {
+    font-size: 15px;
     &:hover {
       border-color: transparent !important;
     }
@@ -58,6 +59,27 @@
       background-color: transparent !important;
       border: 0px solid transparent !important;
       border-bottom: 4px solid #c01920 !important;
+    }
+  }
+}
+.dataTables_wrapper {
+  overflow-y: auto;
+  height: 400px;
+  .dataTable {
+    thead {
+      th {
+        position: sticky;
+        top: -2px;
+        background: #fff;
+      }
+    }
+    tbody {
+      td {
+        .status.status-published {
+          color: #28c78a;
+          background: transparent;
+        }
+      }
     }
   }
 }

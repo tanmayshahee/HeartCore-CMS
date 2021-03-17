@@ -28,8 +28,10 @@ const GridTable = ({
                 />
                 <span className='label-text'></span>
               </label>
-              <span className='page-title'>{item.title}</span>
             </div>
+          </td>
+          <td>
+            <span className='page-title'>{item.title}</span>
           </td>
           <td>{item.id}</td>
 

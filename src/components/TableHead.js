@@ -46,10 +46,13 @@ const TableHead = ({
               />
               <span className='label-text'></span>
             </label>
-            {getColumnTitleBasedOnTab(selectedContentClassTab)}
-            <i className='log-i log-icon-angle-down-solid sort-icon'></i>
           </div>
         </th>
+        <th>
+          {getColumnTitleBasedOnTab(selectedContentClassTab)}{' '}
+          <i className='log-i log-icon-angle-down-solid sort-icon'></i>
+        </th>
+
         <th
           className='column-name'
           onClick={() => {
